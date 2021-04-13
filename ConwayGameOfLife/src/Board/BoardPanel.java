@@ -2,13 +2,19 @@ package Board;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 
 public class BoardPanel extends JPanel {
 
@@ -69,27 +75,42 @@ public class BoardPanel extends JPanel {
 		
 		settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.X_AXIS));
 		
+		JPanel timePanel = new JPanel();
+		timePanel.setBorder(BorderFactory.createTitledBorder("Time"));
+		
 		timeLabel = new JLabel();
 		timeLabel.setText("0");
 		
+		timePanel.add(timeLabel);
+		
+		JPanel controlPanel = new JPanel();
+		controlPanel.setBorder(BorderFactory.createTitledBorder("Controls"));
+		
 		playpause = new JButton("Play");
 		restart = new JButton("Restart");
-		
 		next = new JButton("Next");
+		
+		controlPanel.add(playpause);
+		controlPanel.add(restart);
+		controlPanel.add(next);
+		
+
+		JPanel speedPanel = new JPanel();
+		speedPanel.setBorder(BorderFactory.createTitledBorder("Simulation Speed"));
 		
 		speed = new JSlider(JSlider.HORIZONTAL,
                 SPEED_MIN, SPEED_MAX, SPEED_INIT);
 		
-		speed.setMajorTickSpacing(5);
+		speed.setMajorTickSpacing(1);
 		speed.setMinorTickSpacing(1);
 		speed.setPaintTicks(true);
 		speed.setPaintLabels(true);
 		
-		settingsPanel.add(timeLabel);
-		settingsPanel.add(playpause);
-		settingsPanel.add(restart);
-		settingsPanel.add(next);
-		settingsPanel.add(speed);
+		speedPanel.add(speed);
+		
+		settingsPanel.add(timePanel);
+		settingsPanel.add(controlPanel);
+		settingsPanel.add(speedPanel);
 	}
 	
 	protected JButton getPlayPauseButton() {
