@@ -26,7 +26,7 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(100*(11-model.getSpeed()));
+					Thread.sleep(100*(10-model.getSpeed()));
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -55,6 +55,7 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 		}
 		view.getNextButton().addActionListener(this);
 		view.getSpeedSlider().addChangeListener(this);
+		view.getClearButton().addActionListener(this);
 	}
 	
 	private void restartSimulation() {
@@ -70,6 +71,7 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 			if (!runSimulation.get()) {
 				view.getPlayPauseButton().setText("Pause");
 				view.getNextButton().setEnabled(false);
+				view.getClearButton().setEnabled(false);
 				runSimulation.set(true);
 				SwingUtilities.invokeLater(simulate);
 			}
@@ -78,6 +80,7 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 				runSimulation.set(false);
 				view.getPlayPauseButton().setText("Play");
 				view.getNextButton().setEnabled(true);
+				view.getClearButton().setEnabled(true);
 			}
 			
 		}
@@ -86,12 +89,18 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 			runSimulation.set(false);
 			view.getPlayPauseButton().setText("Play");
 			view.getNextButton().setEnabled(true);
+			view.getClearButton().setEnabled(true);
 			restartSimulation();
 		}
 		
 		else if (e.getSource() == view.getNextButton()) {
 			model.updateBoard();
 			view.getTimeLabel().setText(model.getTime()+"");
+			view.repaint();
+		}
+		
+		else if (e.getSource() == view.getClearButton()) {
+			model.clear();
 			view.repaint();
 		}
 	}

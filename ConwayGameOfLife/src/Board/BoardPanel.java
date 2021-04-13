@@ -31,6 +31,7 @@ public class BoardPanel extends JPanel {
 	private JButton playpause;
 	private JButton restart;
 	private JButton next;
+	private JButton clear;
 	private JSlider speed;
 	
 	public BoardPanel(BoardModel model) {
@@ -87,11 +88,11 @@ public class BoardPanel extends JPanel {
 		playpause = new JButton("Play");
 		restart = new JButton("Restart");
 		next = new JButton("Next");
-		
+		clear = new JButton("Clear");
 		controlPanel.add(playpause);
 		controlPanel.add(restart);
 		controlPanel.add(next);
-		
+		controlPanel.add(clear);
 
 		JPanel speedPanel = new JPanel();
 		speedPanel.setBorder(BorderFactory.createTitledBorder("Simulation Speed"));
@@ -123,6 +124,10 @@ public class BoardPanel extends JPanel {
 	
 	protected JButton getNextButton() {
 		return next;
+	}
+	
+	protected JButton getClearButton() {
+		return clear;
 	}
 	
 	protected JLabel getTimeLabel() {

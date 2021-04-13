@@ -83,7 +83,6 @@ public class BoardModel {
 	}
 
 	public void updateBoard() {
-		nextState.clear();
 		
 		for (CellModel relevantCell : relevantCells.values()) {
 			getNextState(relevantCell);
@@ -96,6 +95,7 @@ public class BoardModel {
 				updateNeighbors(relevantCell);
 			}
 		}
+		nextState.clear();
 		
 		time++;
 		
@@ -155,8 +155,8 @@ public class BoardModel {
 			CellModel relevantCell = relevantCells.get(position);
 			if (!relevantCell.isAlive()) {
 				relevantCell.removeNeighbor(cell);
-				if (!relevantCell.hasNeighbor()) relevantCells.remove(relevantCell.getPosition());
-				if (!cell.hasNeighbor()) relevantCells.remove(cell.getPosition());
+				if (!relevantCell.hasNeighbor() && !nextState.containsKey(relevantCell.getPosition())) relevantCells.remove(relevantCell.getPosition());
+				if (!cell.hasNeighbor() && !nextState.containsKey(cell.getPosition())) relevantCells.remove(cell.getPosition());
 			}
 					
 		}
@@ -165,6 +165,11 @@ public class BoardModel {
 
 	public Map<Position,Boolean> getInitialState() {
 		return initialState;
+	}
+
+	public void clear() {
+		initialState.clear();
+		reset();
 	}
 
 }
