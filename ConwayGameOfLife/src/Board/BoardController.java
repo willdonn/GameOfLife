@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.SwingUtilities;
@@ -31,12 +32,10 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				model.updateBoard();
-				view.getTimeLabel().setText(model.getTime()+"");
-				view.repaint();
-				
 				if (runSimulation.get()) {
+					model.updateBoard();
+					view.getTimeLabel().setText(model.getTime()+"");
+					view.repaint();
 					SwingUtilities.invokeLater(simulate);
 				}
 				
@@ -68,7 +67,6 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getSource() == view.getPlayPauseButton()) {
 			if (!runSimulation.get()) {
 				view.getPlayPauseButton().setText("Pause");
@@ -107,10 +105,17 @@ public class BoardController implements ActionListener, MouseListener, ChangeLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() instanceof BoardCell) {
-			BoardCell cell = (BoardCell) e.getSource();
-			cell.setAlive(!cell.isAlive());
+		if (e.getSource() instanceof CellPanel) {
+			CellPanel cell = (CellPanel) e.getSource();
+			cell.getModel().setAlive(!cell.getModel().isAlive());
+			if (cell.getModel().isAlive()) {
+				model.getReleventCells().put(cell.getModel().getPosition(), cell.getModel());
+				if (!runSimulation.get()) model.getInitialState().put(cell.getModel().getPosition(), true);
+			} else {
+				if (!runSimulation.get()) model.getInitialState().remove(cell.getModel().getPosition());
+			}
+			model.updateNeighbors(cell.getModel());
+			
 			view.repaint();
 		}
 	}

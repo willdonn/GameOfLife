@@ -1,0 +1,50 @@
+package Board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoardModel {
+
+	private List<List<BoardCell>> board;
+	
+	private int width;
+	private int height;
+	
+	public BoardModel(int width, int height) {
+		this.width = width;
+		this.height = height;
+		initBoard();
+	}
+	
+	private void initBoard() {
+		board = new ArrayList<List<BoardCell>>();
+		
+		for (int x = 0; x < width; x++) {
+			ArrayList<BoardCell> row = new ArrayList<BoardCell>();
+			for (int y = 0; y < height; y++) {
+				row.add(new BoardCell());
+			}
+			board.add(row);
+		}
+	}
+	
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return height;
+	}
+
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return width;
+	}
+	
+	public List<List<BoardCell>> getBoard(){
+		return board;
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

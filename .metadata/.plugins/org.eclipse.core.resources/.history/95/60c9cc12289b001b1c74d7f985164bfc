@@ -1,0 +1,18 @@
+package Board;
+
+public interface CellInterface {
+	
+	public boolean isAlive();
+	
+	public void setAlive(boolean alive);
+	
+	public void setPosition(Position position);
+	
+	public Position getPosition();
+	
+	public void addNeighbor(Cell neighbor);
+	
+	public void removeNeighbor(Cell neighbor);
+	
+	public boolean hasNeighbor();
+}

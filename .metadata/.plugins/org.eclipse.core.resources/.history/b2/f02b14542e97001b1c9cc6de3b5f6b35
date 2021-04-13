@@ -1,0 +1,70 @@
+package Board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoardModel {
+
+	private List<List<BoardCell>> board;
+	private List<List<Boolean>> nextState;
+	
+	private int width;
+	private int height;
+	
+	public BoardModel(int width, int height) {
+		this.width = width;
+		this.height = height;
+		initBoard();
+	}
+	
+	private void initBoard() {
+		board = new ArrayList<List<BoardCell>>();
+		
+		for (int x = 0; x < width; x++) {
+			ArrayList<BoardCell> boardRow = new ArrayList<BoardCell>();
+			ArrayList<Boolean> stateRow = new ArrayList<Boolean>();
+			for (int y = 0; y < height; y++) {
+				boardRow.add(new BoardCell(new Position(x, y)));
+				stateRow.add(false);
+			}
+			board.add(boardRow);
+			nextState.add(stateRow);
+		}
+	}
+	
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return height;
+	}
+
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return width;
+	}
+	
+	public List<List<BoardCell>> getBoard(){
+		return board;
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private Boolean getNextState(BoardCell cell) {
+		
+		int neighbors = 0;
+		
+		if (cell.)
+		
+	}
+
+	public void updateBoard() {
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				nextState.get(y).set(x, getNextState(board.get(y).get(x)));
+			}
+		}
+	}
+
+}

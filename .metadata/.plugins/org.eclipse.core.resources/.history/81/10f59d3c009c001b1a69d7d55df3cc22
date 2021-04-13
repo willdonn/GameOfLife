@@ -1,0 +1,23 @@
+package Board;
+
+public class Position {
+
+	public final int x;
+	public final int y;
+	public final int hash;
+	
+	public Position(int x, int y) {
+		this.x = x;
+		this.y = y;
+		hash = (13 + x) * 13 + y;
+	}
+	
+	public boolean equals(Position position) {
+		return this.x == position.x && this.y == position.y;
+	}
+	
+	public int hashCode() {
+        return hash;
+    }
+	
+}

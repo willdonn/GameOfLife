@@ -1,0 +1,11 @@
+package Board;
+
+public class LivingCell extends Cell {
+
+	private int neighbor;
+	private Position position;
+	
+	public LivingCell(Position position) {
+		super(position);
+	}
+}

@@ -11,6 +11,12 @@ import Board.BoardPanel;
 
 public class GameOfLifeView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	private enum ViewState {START_MENU, ENVIRONMENT_VIEW};
 	
 	public ViewState state;
@@ -40,7 +46,7 @@ public class GameOfLifeView extends JFrame {
 	}
 
 	public void showBoardView() {
-		boardModel = new BoardModel(20, 20);
+		boardModel = new BoardModel(40,40);
 		boardView = new BoardPanel(boardModel);
 		boardController = new BoardController(boardModel, boardView);
 		state = ViewState.ENVIRONMENT_VIEW;

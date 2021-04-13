@@ -1,0 +1,68 @@
+package Board;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+public class BoardCell extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	private Cell cell;
+	
+	public BoardCell(Position position) {
+		this.cell = new Cell(position);
+	}
+	
+	public Position getPosition() {
+		return cell.getPosition();
+	}
+	
+	public boolean isAlive() {
+		return cell.isAlive();
+	}
+	
+	public void setAlive(boolean alive) {
+		cell.setAlive(alive);
+	}
+	
+	public void setPosition(Position position) {
+		cell.setPosition(position);
+	}
+
+	public void addNeighbor(Cell neighbor) {
+		cell.addNeighbor(neighbor);
+	}
+
+	public void removeNeighbor(Cell neighbor) {
+		cell.removeNeighbor(neighbor);
+	}
+
+	public boolean hasNeighbor() {
+		return cell.hasNeighbor();
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+//		int centrX = getWidth()/2;
+//		int centrY = getWidth()/2;
+//		int radius = getWidth()/4;
+		
+		if (cell.isAlive()) {
+			g.setColor(Color.YELLOW);
+			g.fillRect(1, 1, getWidth()-1, getHeight()-1);
+		} else {
+			g.setColor(Color.DARK_GRAY);
+			g.fillRect(1, 1, getWidth()-1, getHeight()-1);
+		}
+		
+//		if (contents != null) {
+//			g.setColor(contents.getColor());
+//			g.fillOval(centrX-radius, centrY-radius, radius*2, radius*2);
+//			
+//		} 
+	}
+
+
+}
