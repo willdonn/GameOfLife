@@ -12,6 +12,7 @@ public class CellPanel extends JPanel{
 	
 	public CellPanel(Position position) {
 		this.cellModel = new CellModel(position);
+		this.setBackground(Color.BLACK);
 	}
 	
 	public CellModel getModel() {
@@ -21,23 +22,13 @@ public class CellPanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-//		int centrX = getWidth()/2;
-//		int centrY = getWidth()/2;
-//		int radius = getWidth()/4;
-		
 		if (cellModel.isAlive()) {
-			g.setColor(Color.YELLOW);
-			g.fillRect(1, 1, getWidth()-1, getHeight()-1);
+			g.setColor(Color.LIGHT_GRAY);
+			g.fillRect(1, 1, getWidth()-2, getHeight()-2);
 		} else {
 			g.setColor(Color.DARK_GRAY);
-			g.fillRect(1, 1, getWidth()-1, getHeight()-1);
-		}
-		
-//		if (contents != null) {
-//			g.setColor(contents.getColor());
-//			g.fillOval(centrX-radius, centrY-radius, radius*2, radius*2);
-//			
-//		} 
+			g.fillRect(1, 1, getWidth()-2, getHeight()-2);
+		} 
 	}
 
 

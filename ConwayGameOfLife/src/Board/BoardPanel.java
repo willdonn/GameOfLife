@@ -2,18 +2,13 @@ package Board;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Insets;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 
 public class BoardPanel extends JPanel {
@@ -24,6 +19,8 @@ public class BoardPanel extends JPanel {
 	static final int SPEED_MAX = 10;
 	static final int SPEED_INIT = 5; 
 
+	private final Color background = Color.LIGHT_GRAY;
+	
 	private BoardModel model;
 	
 	private JPanel boardPanel;
@@ -59,7 +56,7 @@ public class BoardPanel extends JPanel {
 		boardPanel.setName("Board");
 	
 		boardPanel.setLayout(new GridLayout(model.getHeight(), model.getWidth()));
-		boardPanel.setBackground(Color.gray);
+		boardPanel.setBackground(background);
 		
 		for (int y = 0; y < model.getHeight(); y++) {
 			for (int x = 0; x < model.getWidth(); x++) {
@@ -74,10 +71,11 @@ public class BoardPanel extends JPanel {
 		settingsPanel = new JPanel();
 		
 		settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.X_AXIS));
-		
+		settingsPanel.setBackground(background);
 		JPanel timePanel = new JPanel();
 		timePanel.setBorder(BorderFactory.createTitledBorder("Time"));
-		
+		timePanel.setBackground(background);
+
 		timeLabel = new JLabel();
 		timeLabel.setText("0");
 		
@@ -85,7 +83,7 @@ public class BoardPanel extends JPanel {
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setBorder(BorderFactory.createTitledBorder("Controls"));
-		
+		controlPanel.setBackground(background);
 		playpause = new JButton("Play");
 		restart = new JButton("Restart");
 		next = new JButton("Next");
@@ -97,16 +95,18 @@ public class BoardPanel extends JPanel {
 
 		JPanel speedPanel = new JPanel();
 		speedPanel.setBorder(BorderFactory.createTitledBorder("Simulation Speed"));
-		
+		speedPanel.setBackground(background);
+
 		speed = new JSlider(JSlider.HORIZONTAL,
                 SPEED_MIN, SPEED_MAX, SPEED_INIT);
-		
+		speed.setBackground(background);
 		speed.setMajorTickSpacing(1);
 		speed.setMinorTickSpacing(1);
 		speed.setPaintTicks(true);
 		speed.setPaintLabels(true);
 		
 		speedPanel.add(speed);
+		
 		
 		settingsPanel.add(timePanel);
 		settingsPanel.add(controlPanel);
